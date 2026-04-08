@@ -7,7 +7,7 @@
 """Feed Balance Environment."""
 
 from .client import FeedBalanceEnv
-from .models import FeedBalanceAction, FeedBalanceObservation
+from .server.models import FeedBalanceAction, FeedBalanceObservation
 
 __all__ = [
     "FeedBalanceAction",

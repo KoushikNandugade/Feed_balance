@@ -2,10 +2,10 @@ import os
 from openai import OpenAI
 try:
     from client import FeedBalanceEnv
-    from models import FeedBalanceAction
+    from server.models import FeedBalanceAction
 except ImportError:
     from feed_balance.client import FeedBalanceEnv
-    from feed_balance.models import FeedBalanceAction
+    from feed_balance.server.models import FeedBalanceAction
 
 # --- EXACT CODE FROM THE HACKATHON CHECKLIST ---
 API_BASE_URL = os.getenv("API_BASE_URL", "https://api.openai.com/v1")

@@ -36,15 +36,11 @@ except Exception as e:  # pragma: no cover
     ) from e
 
 try:
-    from models import FeedBalanceAction, FeedBalanceObservation
+    from .models import FeedBalanceAction, FeedBalanceObservation
     from .feed_balance_environment import FeedBalanceEnvironment
 except (ImportError, ModuleNotFoundError):
-    try:
-        from feed_balance.models import FeedBalanceAction, FeedBalanceObservation
-        from feed_balance.server.feed_balance_environment import FeedBalanceEnvironment
-    except (ImportError, ModuleNotFoundError):
-        from models import FeedBalanceAction, FeedBalanceObservation
-        from server.feed_balance_environment import FeedBalanceEnvironment
+    from models import FeedBalanceAction, FeedBalanceObservation
+    from feed_balance_environment import FeedBalanceEnvironment
 
 
 # Create the app with web interface and README integration

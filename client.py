@@ -12,7 +12,13 @@ from openenv.core import EnvClient
 from openenv.core.client_types import StepResult
 from openenv.core.env_server.types import State
 
-from models import FeedBalanceAction, FeedBalanceObservation
+try:
+    from .server.models import FeedBalanceAction, FeedBalanceObservation
+except (ImportError, ModuleNotFoundError, ValueError):
+    try:
+        from server.models import FeedBalanceAction, FeedBalanceObservation
+    except (ImportError, ModuleNotFoundError):
+        from feed_balance.server.models import FeedBalanceAction, FeedBalanceObservation
 
 
 class FeedBalanceEnv(

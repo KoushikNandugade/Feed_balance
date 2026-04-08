@@ -1,6 +1,6 @@
 import os
 from client import FeedBalanceEnv
-from models import FeedBalanceAction
+from server.models import FeedBalanceAction
 
 def run_baseline():
     print("🚀 Starting OpenEnv Baseline Evaluation...")
