@@ -27,7 +27,8 @@ def run_inference():
     )
 
     # Connect to your running server
-    with FeedBalanceEnv(base_url="http://localhost:8000").sync() as env_client:
+    # Use 7860 as configured in the server
+    with FeedBalanceEnv(base_url="http://localhost:7860").sync() as env_client:
         result = env_client.reset()
         done = False
         step_count = 0
