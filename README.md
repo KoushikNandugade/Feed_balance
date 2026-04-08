@@ -1,3 +1,13 @@
+---
+title: Feed Balance
+emoji: 📱
+colorFrom: indigo
+colorTo: blue
+sdk: docker
+pinned: false
+license: mit
+---
+
 # 📱 Feed Balance Environment
 
 ## Overview & Motivation
