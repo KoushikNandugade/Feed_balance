@@ -1,3 +1,4 @@
+from __future__ import annotations
 import uuid
 import random
 from uuid import uuid4
