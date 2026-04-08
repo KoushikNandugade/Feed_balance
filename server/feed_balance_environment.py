@@ -1,7 +1,7 @@
 import uuid
 import random
 from uuid import uuid4
-from openenv_core import Environment, State
+from openenv.core import Environment, State
 from models import FeedBalanceAction, FeedBalanceObservation
 
 class FeedBalanceEnvironment(Environment):
