@@ -10,9 +10,9 @@ if TYPE_CHECKING:
     from openenv.core.rubrics import Rubric
 
 try:
+    from .models import FeedBalanceAction, FeedBalanceObservation
+except (ImportError, ValueError):
     from models import FeedBalanceAction, FeedBalanceObservation
-except ImportError:
-    from ..models import FeedBalanceAction, FeedBalanceObservation
 
 class FeedBalanceEnvironment(Environment):
     SUPPORTS_CONCURRENT_SESSIONS: bool = True
