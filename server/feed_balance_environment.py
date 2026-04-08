@@ -1,14 +1,28 @@
 import uuid
 import random
 from uuid import uuid4
+from typing import Any, Optional, TYPE_CHECKING
 from openenv.core import Environment, State
-from models import FeedBalanceAction, FeedBalanceObservation
+
+if TYPE_CHECKING:
+    from openenv.core.env_server.interfaces import Transform
+    from openenv.core.rubrics import Rubric
+
+try:
+    from models import FeedBalanceAction, FeedBalanceObservation
+except ImportError:
+    from ..models import FeedBalanceAction, FeedBalanceObservation
 
 class FeedBalanceEnvironment(Environment):
     SUPPORTS_CONCURRENT_SESSIONS: bool = True
 
-    def __init__(self):
+    def __init__(
+        self,
+        transform: Optional[Transform[FeedBalanceObservation]] = None,
+        rubric: Optional["Rubric"] = None,
+    ):
         """Initialize the feed_balance environment."""
+        super().__init__(transform=transform, rubric=rubric)
         self._state = State(episode_id=str(uuid4()), step_count=0)
         self._reset_count = 0
         
@@ -20,9 +34,15 @@ class FeedBalanceEnvironment(Environment):
         self.target_profit = 5.0
         self.boredom_multiplier = 1
 
-    def reset(self) -> FeedBalanceObservation:
+    def reset(
+        self,
+        seed: Optional[int] = None,
+        episode_id: Optional[str] = None,
+        **kwargs: Any,
+    ) -> FeedBalanceObservation:
         """Reset the environment and assign a task difficulty."""
-        self._state = State(episode_id=str(uuid4()), step_count=0)
+        self._reset_rubric()
+        self._state = State(episode_id=episode_id or str(uuid4()), step_count=0)
         self._reset_count += 1
         
         # REQ #3: Assign one of 3 Tasks (Easy, Medium, Hard)

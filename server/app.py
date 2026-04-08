@@ -38,9 +38,13 @@ except Exception as e:  # pragma: no cover
 try:
     from models import FeedBalanceAction, FeedBalanceObservation
     from .feed_balance_environment import FeedBalanceEnvironment
-except ModuleNotFoundError:
-    from models import FeedBalanceAction, FeedBalanceObservation
-    from server.feed_balance_environment import FeedBalanceEnvironment
+except (ImportError, ModuleNotFoundError):
+    try:
+        from feed_balance.models import FeedBalanceAction, FeedBalanceObservation
+        from feed_balance.server.feed_balance_environment import FeedBalanceEnvironment
+    except (ImportError, ModuleNotFoundError):
+        from models import FeedBalanceAction, FeedBalanceObservation
+        from server.feed_balance_environment import FeedBalanceEnvironment
 
 
 # Create the app with web interface and README integration
@@ -55,8 +59,13 @@ app = create_app(
 
 @app.get("/")
 async def root():
-    """Health check endpoint."""
-    return {"status": "ok", "message": "Feed Balance Environment is running"}
+    """Health check endpoint for OpenEnv submission."""
+    return {
+        "status": "ok",
+        "message": "Feed Balance Environment is running",
+        "environment": "feed_balance",
+        "version": "1.0.0"
+    }
 
 
 def main(host: str = "0.0.0.0", port: int = 8000):

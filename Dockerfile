@@ -11,5 +11,8 @@ RUN pip install --no-cache-dir .
 # Expose port 7860 (default for HF Spaces)
 EXPOSE 7860
 
+# Ensure the app can find its internal modules
+ENV PYTHONPATH=/app
+
 # Run the server on port 7860
 CMD ["python", "-m", "feed_balance.server.app", "--port", "7860"]

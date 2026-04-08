@@ -2,6 +2,6 @@ spec_version: 1
 name: feed_balance
 type: space
 runtime: fastapi
-app: server.app:app
+app: feed_balance.server.app:app
 port: 7860
 

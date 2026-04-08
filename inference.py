@@ -1,7 +1,11 @@
 import os
 from openai import OpenAI
-from client import FeedBalanceEnv
-from models import FeedBalanceAction
+try:
+    from client import FeedBalanceEnv
+    from models import FeedBalanceAction
+except ImportError:
+    from feed_balance.client import FeedBalanceEnv
+    from feed_balance.models import FeedBalanceAction
 
 # --- EXACT CODE FROM THE HACKATHON CHECKLIST ---
 API_BASE_URL = os.getenv("API_BASE_URL", "https://api.openai.com/v1")
