@@ -30,7 +30,6 @@ Usage:
 
 try:
     from openenv.core.env_server.http_server import create_app
-    from fastapi.responses import RedirectResponse
 except Exception as e:  # pragma: no cover
     raise ImportError(
         "openenv is required for the web interface. Install dependencies with '\n    uv sync\n'"
@@ -56,8 +55,8 @@ app = create_app(
 
 @app.get("/")
 async def root():
-    """Redirect to the documentation page."""
-    return RedirectResponse(url="/docs")
+    """Health check endpoint."""
+    return {"status": "ok", "message": "Feed Balance Environment is running"}
 
 
 def main(host: str = "0.0.0.0", port: int = 8000):
